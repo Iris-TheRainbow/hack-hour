@@ -19,15 +19,18 @@ emitter.on('minute', async () => {
             if (session.paused) {
                 updatedSession = await prisma.session.update({
                     where: {
-                        messageTs: session.messageTs
+                        createdAt: session.messageTs
                     },
                     data: {
+                        /*
                         elapsedSincePause: {
                             increment: 1
                         }
+                            */
                     }
                 });
 
+                /*
                 if (updatedSession.elapsedSincePause > Constants.AUTO_CANCEL) {
                     updatedSession = await prisma.session.update({
                         where: {
@@ -43,12 +46,13 @@ emitter.on('minute', async () => {
                 } else {
                     emitter.emit('sessionUpdate', updatedSession);
                 }
+                */
 
                 continue;
             } else {
                 updatedSession = await prisma.session.update({
                     where: {
-                        messageTs: session.messageTs
+                        createdAt: session.createdAt
                     },
                     data: {
                         elapsed: {
@@ -86,7 +90,7 @@ emitter.on('minute', async () => {
             if (updatedSession.elapsed >= updatedSession.time) { // TODO: Commit hours to goal, verify hours with events                
                 updatedSession = await prisma.session.update({
                     where: {
-                        messageTs: session.messageTs
+                        createdAt: session.createdAt
                     },
                     data: {
                         completed: true
