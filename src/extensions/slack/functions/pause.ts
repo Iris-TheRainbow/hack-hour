@@ -1,8 +1,8 @@
 /*
 Pause Management
 */
-import { app } from "../../../lib/bolt.js";
-import { Environment, Actions, Commands } from "../../../lib/constants.js";
+import { app } from "../bolt.js";
+import { Environment, Actions, Commands } from "../constants.js";
 import { prisma } from "../../../lib/prisma.js";
 import { emitter } from "../../../lib/emitter.js";
 import { Session } from "../../../lib/corelib.js";

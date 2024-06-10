@@ -1,5 +1,5 @@
 import { View } from "@slack/bolt";
-import { Callbacks } from "../../../lib/constants.js";
+import { Callbacks } from "../constants.js";
 
 export class Cancel {
     public static async cancel(thread_ts: string): Promise<View> {

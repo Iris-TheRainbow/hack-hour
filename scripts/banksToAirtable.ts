@@ -3,7 +3,7 @@ dotenv.config();
 
 import { AirtableAPI } from '../src/extensions/ship/airtable.js';
 import { prisma, uid } from '../src/lib/prisma.js';
-import { app } from '../src/lib/bolt.js';
+import { app } from '../src/extensions/slack/bolt.js';
 import { Prisma } from '@prisma/client';
 
 const fetchOrCreateUser = async (user: Prisma.UserGetPayload<{ include: { slackUser: true } }>) => {

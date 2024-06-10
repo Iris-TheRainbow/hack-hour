@@ -1,5 +1,5 @@
-import { app } from "../../lib/bolt.js";
-import { Actions, Commands, Environment } from "../../lib/constants.js";
+import { app } from "./bolt.js";
+import { Actions, Commands, Environment } from "./constants.js";
 import { prisma, uid } from "../../lib/prisma.js";
 import { emitter } from "../../lib/emitter.js";
 
@@ -195,19 +195,7 @@ app.command(Commands.HACK, async ({ command, ack }) => {
                             id: uid(),
                             lifetimeMinutes: 0,
                             apiKey: uid(),
-                            goals: {
-                                create: {
-                                    id: uid(),
-
-                                    name: "No Goal",
-                                    description: "A default goal for users who have not set one.",
-
-                                    totalMinutes: 0,
-                                    createdAt: new Date(),
-
-                                    selected: true
-                                }
-                            }
+                            metadata: {}
                         }
                     },
                     tz_offset: slackUserData.user.tz_offset
@@ -253,13 +241,6 @@ app.command(Commands.HACK, async ({ command, ack }) => {
         {
             where: {
                 id: slackUser.userId
-            },
-            include: {
-                goals: {
-                    where: {
-                        name: "No Goal"
-                    }
-                }
             }
         }
     );
@@ -292,7 +273,7 @@ app.command(Commands.HACK, async ({ command, ack }) => {
             cancelled: false,
             paused: false,
 
-            elapsedSincePause: 0,
+//            elapsedSincePause: 0,
 
             metadata: {
                 slack: {
@@ -300,8 +281,6 @@ app.command(Commands.HACK, async ({ command, ack }) => {
                 },
                 work: command.text
             },
-
-            goalId: user.goals[0].id
         }
     });
 
@@ -347,7 +326,7 @@ emitter.on('sessionUpdate', async (session: Session) => {
             // Remove the session
             await prisma.session.delete({
                 where: {
-                    messageTs: session.messageTs
+                    createdAt: session.createdAt
                 }
             });
 
@@ -422,18 +401,6 @@ emitter.on('complete', async (session: Session) => {
         timestamp: session.messageTs
     });
 
-    // Increment minutes in goals
-    await prisma.goal.update({
-        where: {
-            id: session.goalId as string
-        },
-        data: {
-            totalMinutes: {
-                increment: session.elapsed
-            }
-        }
-    });    
-
     await updateController(session);
     await updateTopLevel(session);
 });
@@ -477,18 +444,6 @@ emitter.on('cancel', async (session: Session) => {
                 }
             }
         ]        
-    });
-
-    // Increment minutes in goals
-    await prisma.goal.update({
-        where: {
-            id: session.goalId as string
-        },
-        data: {
-            totalMinutes: {
-                increment: session.elapsed
-            }
-        }
     });
 
     await app.client.reactions.add({

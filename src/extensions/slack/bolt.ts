@@ -2,7 +2,7 @@ import bolt from '@slack/bolt';
 import bodyParser from 'body-parser';
 
 import { Environment } from './constants.js';
-import { emitter } from './emitter.js';
+import { emitter } from '../../lib/emitter.js';
 
 const expressReceiver = new bolt.ExpressReceiver({
     signingSecret: Environment.SLACK_SIGNING_SECRET,

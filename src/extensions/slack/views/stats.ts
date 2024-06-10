@@ -2,7 +2,7 @@ import { prisma } from "../../../lib/prisma.js";
 import { KnownBlock, View } from "@slack/bolt";
 import { formatHour } from "../../../lib/templates.js";
 
-import { Callbacks } from "../../../lib/constants.js";
+import { Callbacks } from "../constants.js";
 
 export class Stats {
     public static async stats(userId: string): Promise<View> {
@@ -16,6 +16,9 @@ export class Stats {
             throw new Error(`User ${userId} not found.`);
         }
 
+        const blocks: KnownBlock[] = [];
+
+        /*
         const goals = await prisma.goal.findMany({
             where: {
                 userId: userId,
@@ -40,6 +43,7 @@ export class Stats {
         blocks.unshift({
             "type": "divider"
         });
+        */
         blocks.unshift({
             "type": "section",
             "text": {

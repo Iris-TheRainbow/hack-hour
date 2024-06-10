@@ -21,7 +21,7 @@ export class Session {
     public static async cancel(session: SessionType) {
         const updatedSession = await prisma.session.update({
             where: {
-                messageTs: session.messageTs
+                createdAt: session.createdAt
             },
             data: {
                 cancelled: true
@@ -39,11 +39,11 @@ export class Session {
         // If resuming the session, reset the elapsed time since pause
         const updatedSession = await prisma.session.update({
             where: {
-                messageTs: session.messageTs
+                createdAt: session.createdAt
             },
             data: {
                 paused: !session.paused,
-                elapsedSincePause: session.paused ? 0 : session.elapsedSincePause
+//                elapsedSincePause: session.paused ? 0 : session.elapsedSincePause
             }
         });
     
@@ -64,7 +64,7 @@ export class Session {
     public static async extend(session: SessionType, minutes: number) {
         const updatedSession = await prisma.session.update({
             where: {
-                messageTs: session.messageTs
+                createdAt: session.createdAt
             },
             data: {
                 time: {

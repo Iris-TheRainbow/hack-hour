@@ -1,7 +1,7 @@
 import { Prisma } from "@prisma/client";
 import { Environment } from "../../../lib/constants.js";
 
-import { app } from "../../../lib/bolt.js";
+import { app } from "../bolt.js";
 import { prisma } from "../../../lib/prisma.js";
 import { t } from "../../../lib/templates.js";
 

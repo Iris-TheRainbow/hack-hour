@@ -90,6 +90,7 @@ export class TopLevel {
         }
         */
         // hacky replacement, but fetch the goal from the session
+        /*
         if (!session.goalId) { throw new Error(`No goal found for session ${session.messageTs}`); }
 
         const curGoal = await prisma.goal.findUniqueOrThrow({
@@ -108,6 +109,7 @@ export class TopLevel {
                 }
             ]
         });
+        */
 
         return blocks;
     }

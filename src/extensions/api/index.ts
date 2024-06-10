@@ -1,7 +1,7 @@
 import { Server } from "http";
 import { prisma } from "../../lib/prisma.js";
 import { emitter } from "../../lib/emitter.js";
-import { express } from "../../lib/bolt.js";
+import { express } from "../slack/bolt.js";
 import { WebSocket, WebSocketServer } from 'ws';
 import { Event } from "../../lib/emitter.js";
 import { Session } from "@prisma/client";

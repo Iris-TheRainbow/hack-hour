@@ -1,5 +1,5 @@
-import { app } from "../../../lib/bolt.js";
-import { Commands, Callbacks, Actions, Environment } from "../../../lib/constants.js";
+import { app } from "../bolt.js";
+import { Commands, Callbacks, Actions, Environment } from "../constants.js";
 import { emitter } from "../../../lib/emitter.js";
 import { prisma } from "../../../lib/prisma.js";
 import { informUser, slashCommand } from "../lib/lib.js";

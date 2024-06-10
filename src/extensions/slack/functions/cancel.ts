@@ -1,8 +1,8 @@
 /*
 Cancellation
 */
-import { app } from "../../../lib/bolt.js";
-import { Environment, Actions, Commands, Callbacks } from "../../../lib/constants.js";
+import { app } from "../bolt.js";
+import { Environment, Actions, Commands, Callbacks } from "../constants.js"
 import { prisma } from "../../../lib/prisma.js";
 import { emitter } from "../../../lib/emitter.js";
 
@@ -33,7 +33,7 @@ app.view(Callbacks.CANCEL, async ({ ack, body, view }) => {
         const slackId = body.user.id;
         const messageTs = view.private_metadata;
 
-        const session = await prisma.session.findFirst({
+        const session = await prisma.session.findFirstOrThrow({
             where: {
                 messageTs,
                 completed: false,
