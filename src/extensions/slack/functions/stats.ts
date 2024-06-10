@@ -2,7 +2,8 @@ import { app } from "../bolt.js";
 import { Commands, Callbacks, Actions, Environment } from "../constants.js";
 import { emitter } from "../../../lib/emitter.js";
 import { prisma } from "../../../lib/prisma.js";
-import { informUser, slashCommand } from "../lib/lib.js";
+import { informUser } from "../lib/lib.js";
+import { BoltWrapper } from "../lib/wrapper.js";
 import { Stats } from "../views/stats.js";
 
 app.action(Actions.VIEW_STATS, async ({ ack, body }) => {
@@ -33,7 +34,7 @@ app.action(Actions.VIEW_STATS, async ({ ack, body }) => {
     }
 });
 
-slashCommand(Commands.STATS, async ({ ack, body, client }) => {
+BoltWrapper.command(Commands.STATS, async ({ ack, body, client }) => {
     const slackId = body.user_id;
     const channelId = body.channel_id;
     const triggerId = body.trigger_id;

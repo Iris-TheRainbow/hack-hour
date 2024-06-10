@@ -3,13 +3,10 @@ import { Environment } from "../constants.js";
 
 import { app } from "../bolt.js";
 import { prisma } from "../../../lib/prisma.js";
-import { t } from "../../../lib/templates.js";
 
 import { Controller } from "../views/controller.js";
 import { TopLevel } from "../views/topLevel.js";
 import { emitter } from "../../../lib/emitter.js";
-import { AllMiddlewareArgs, Middleware, SlackCommandMiddlewareArgs } from "@slack/bolt";
-import { StringIndexed } from "@slack/bolt/dist/types/helpers.js";
 
 export type Session = Prisma.SessionGetPayload<{}>;
 
@@ -46,33 +43,6 @@ export async function updateTopLevel(session: Session) {
     });
 }
             
-export async function slashCommand(command: string, commandHandler: (payload: SlackCommandMiddlewareArgs & AllMiddlewareArgs<StringIndexed>) => void) {
-    app.command(command, async (payload) => {
-        const { command: event, ack, respond } = payload;
-
-        await ack();
-
-        try {
-            respond({
-                blocks: [
-                    {
-                    type: "context",
-                    elements: [
-                        {
-                        type: "mrkdwn",
-                        text: `${command} ${event.text}`,
-                        },
-                    ],
-                    },
-                ]
-            })
-            commandHandler(payload);
-        } catch(error) {
-            emitter.emit('error', error)
-        }
-    })
-}
-
 export async function fetchSlackId(userId: string) {
     const slackUser = await prisma.slackUser.findFirst({
         where: {

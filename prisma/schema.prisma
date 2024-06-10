@@ -89,6 +89,9 @@ model Queue {
     createdAt DateTime @default(now())
 }
 
+
+
+
 // Categorizes the user's sessions (group)
 model Goal { // Group
   id          String  @id
