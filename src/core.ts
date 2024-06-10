@@ -1,6 +1,5 @@
 import { prisma } from "./lib/prisma.js";
 import { emitter } from "./lib/emitter.js";
-import { Constants } from "./lib/constants.js";
 
 emitter.on('minute', async () => {
     try {
@@ -62,7 +61,6 @@ emitter.on('minute', async () => {
                 });
             }
 
-            /*
             await prisma.goal.updateMany({                
                 where: {
                     userId: session.userId,
@@ -74,7 +72,6 @@ emitter.on('minute', async () => {
                     }
                 }
             });
-            */
 
             await prisma.user.update({
                 where: {

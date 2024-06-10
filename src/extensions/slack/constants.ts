@@ -65,10 +65,10 @@ export const Actions = {
     EXTEND: 'extend',
     CANCEL: 'cancel',
 
-/*  OPEN_GOAL: 'opengoal',
+    OPEN_GOAL: 'opengoal',
     SELECT_GOAL: 'selectgoal',
     CREATE_GOAL: 'creategoal',
-    DELETE_GOAL: 'deletegoal',*/
+    DELETE_GOAL: 'deletegoal',
 
     VIEW_STATS: 'viewstats',
 };
@@ -76,9 +76,9 @@ export const Actions = {
 export const Callbacks = {
 //  EXTEND_HOUR: 'extendhour',
 
-/*  MAIN_GOAL: 'maingoal',
+    MAIN_GOAL: 'maingoal',
     CREATE_GOAL: 'callback_creategoal',
-    DELETE_GOAL: 'callback_deletegoal',*/
+    DELETE_GOAL: 'callback_deletegoal',
 
     STATS: 'stats',
 

@@ -1,5 +1,5 @@
 import { Prisma } from "@prisma/client";
-import { Environment } from "../../../lib/constants.js";
+import { Environment } from "../constants.js";
 
 import { app } from "../bolt.js";
 import { prisma } from "../../../lib/prisma.js";
@@ -141,18 +141,4 @@ export async function informUserBlocks(slackId: string, blocks: any[], channel: 
         }
     }
     
-}
-
-// Todo: Move to core standard lib
-export async function cancelSession(slackId: string, session: Session) {
-    const updatedSession = await prisma.session.update({
-        where: {
-            messageTs: session.messageTs
-        },
-        data: {
-            cancelled: true
-        }
-    });
-
-    emitter.emit('cancel', updatedSession);
 }

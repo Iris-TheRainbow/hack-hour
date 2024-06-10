@@ -5,15 +5,14 @@ import { emitter } from "../../lib/emitter.js";
 
 import { t, t_fetch, t_format } from "../../lib/templates.js";
 import { reactOnContent } from "./lib/emoji.js";
-import { updateController, updateTopLevel, cancelSession, informUser, informUserBlocks } from "./lib/lib.js";
+import { updateController, updateTopLevel, informUser, informUserBlocks } from "./lib/lib.js";
 
 import { Session } from "@prisma/client";
 
 import "./functions/pause.js";
 import "./functions/cancel.js";
 import "./functions/extend.js";
-import "./functions/goals.js";
-import "./functions/stats.js"
+import "./functions/stats.js";
 import { Controller } from "./views/controller.js";
 
 /*
@@ -195,7 +194,20 @@ app.command(Commands.HACK, async ({ command, ack }) => {
                             id: uid(),
                             lifetimeMinutes: 0,
                             apiKey: uid(),
-                            metadata: {}
+                            metadata: {},
+                            goals: {
+                                create: {
+                                    id: uid(),
+                                    
+                                    name: "No Goal",
+                                    description: "A default goal for users who have not set one.",
+
+                                    totalMinutes: 0,
+                                    createdAt: new Date(),
+
+                                    selected: true
+                                }
+                            }
                         }
                     },
                     tz_offset: slackUserData.user.tz_offset
@@ -221,7 +233,6 @@ app.command(Commands.HACK, async ({ command, ack }) => {
 
         return;
     }
-
 
     if (existingSession) {
         await informUser(slackId, "You already have an active session. Please cancel it before starting a new one.", command.channel_id);

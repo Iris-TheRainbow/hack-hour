@@ -58,7 +58,6 @@ export class TopLevel {
             type: 'divider'
         });
 
-        /*
         let curGoal = await prisma.goal.findFirst({
             where: {
                 userId: session.userId,
@@ -88,7 +87,6 @@ export class TopLevel {
                 }
             });
         }
-        */
         // hacky replacement, but fetch the goal from the session
         /*
         if (!session.goalId) { throw new Error(`No goal found for session ${session.messageTs}`); }
@@ -99,7 +97,7 @@ export class TopLevel {
             }
         });
 
-
+        */
         blocks.push({
             type: "context",
             elements: [
@@ -109,7 +107,6 @@ export class TopLevel {
                 }
             ]
         });
-        */
 
         return blocks;
     }

@@ -16,9 +16,6 @@ export class Stats {
             throw new Error(`User ${userId} not found.`);
         }
 
-        const blocks: KnownBlock[] = [];
-
-        /*
         const goals = await prisma.goal.findMany({
             where: {
                 userId: userId,
@@ -43,7 +40,7 @@ export class Stats {
         blocks.unshift({
             "type": "divider"
         });
-        */
+        
         blocks.unshift({
             "type": "section",
             "text": {

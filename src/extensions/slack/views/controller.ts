@@ -7,7 +7,6 @@ import { app } from "../bolt.js";
 
 export class Controller {
     public static async panel(session: Session) {
-        /*
         // Pre-fetch the goal
         let curGoal = await prisma.goal.findFirst({
             where: {
@@ -38,7 +37,6 @@ export class Controller {
                 }
             });
         }
-        */
 
         // Pre-fetch the slack user
         const slackUser = await prisma.slackUser.findUniqueOrThrow({
@@ -48,7 +46,6 @@ export class Controller {
         });
 
         // Context Info
-        /*
         const context = {
             "type": "context",
             "elements": [
@@ -57,7 +54,7 @@ export class Controller {
                     "text": `*Goal:* ${curGoal.name} - ${formatHour(curGoal.totalMinutes)} hours`
                 }
             ]
-        };*/
+        };
 
         // Assemble the message
         // Info section
@@ -112,7 +109,7 @@ export class Controller {
                     ],
                     "block_id": "panel"
                 },
-//                context
+                context
             ]
         } else if (session.cancelled || session.completed) {
             return [
@@ -120,7 +117,7 @@ export class Controller {
                 {
                     "type": "divider"
                 },
-//                context
+                context
             ]
         }
 
@@ -154,7 +151,7 @@ export class Controller {
                 ],
                 "block_id": "panel"
             },
-//            context
+            context
         ]
     }
 

@@ -12,6 +12,8 @@ declare global {
         type UserMetaType = {
             // TODO
         }
+        type LogDataTypes = GithubMetaType;
+        type GithubMetaType = {};
     }
 }
 
