@@ -63,6 +63,7 @@ export const Commands = Environment.PROD ? {
   HOUR: '/hour',
   ARCADE: '/arcade',
   ADMIN: '/admin',
+  API: '/api',
   /*
   GOALS: '/goals',
   STATS: '/mystats',
@@ -82,6 +83,7 @@ export const Commands = Environment.PROD ? {
   HOUR: '/testhour',
   ARCADE: '/testarcade',
   ADMIN: '/testadmin',
+  API: '/testapi',
   /*
   GOALS: '/testgoals',
   STATS: '/testmystats',
